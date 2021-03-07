@@ -1,6 +1,7 @@
 from CL.AVLTreeManager import AVLTreeManager
 from CL.BlackRedManager import BlackRedManager
-
+from CL.BTreeController import BTreeController
+from CL.BPlusTreeController import BPlusTreeController
 
 def addNode(controller):
     num = int(input("Digite el numero que desea añadir al arbol AVL"))
@@ -27,8 +28,27 @@ def addBlackRedNode(controllerBlackRed):
 def printBlackRed(controllerBlackRed):
     controllerBlackRed.print()
 
+def addBTree(controllerBTree):
+    num = int(input("Digite el numero que desea añadir al arbol B"))
+    controllerBTree.insert_in_btree(num)
 
-def executeOption(x, controllerAVL, controllerBlackRed):
+def findBTree(controllerBTree):
+    num = int(input("Digite el numero que desea encontrar en el arbol B"))
+    print(controllerBTree.find(num))
+
+def deleteBTree(controllerBTree):
+    num = int(input("Digite el numero que desea eliminar en el arbol B"))
+    controllerBTree.delete(num)
+
+def addBPlusTree(controllerBPlusTree):
+    num = int(input("Digite el numero que desea agregar en el arbol B+"))
+    print(controllerBPlusTree.insert_in_bplustree(num))
+
+def findBPlusTree(controllerBPlusTree):
+    num = int(input("Digite el numero que desea agregar en el arbol B+"))
+    print(controllerBPlusTree.find(num))
+
+def executeOption(x, controllerAVL, controllerBlackRed, controllerBTree, controllerBPlusTree):
     if x == 1:
         addNode(controllerAVL)
         return None
@@ -47,6 +67,18 @@ def executeOption(x, controllerAVL, controllerBlackRed):
     if x == 6:
         printBlackRed(controllerBlackRed)
         return None
+    if x == 7:
+        addBTree(controllerBTree)
+        return None
+    if x == 8:
+        findBTree(controllerBTree)
+        return None
+    if x == 9:
+        addBPlusTree(controllerBPlusTree)
+        return None
+    if x == 10:
+        findBPlusTree(controllerBPlusTree)
+        return None
     if x == 0:
         print("Gracias por usar el programa")
         return None
@@ -57,6 +89,8 @@ def menu():
     x = -1
     controllerAVL = AVLTreeManager()
     controllerBlackRed = BlackRedManager()
+    controllerBTree = BTreeController(5)
+    controllerBPlusTree = BPlusTreeController(5)
 
     while x != 0:
         print("                                                                                  ")
@@ -74,10 +108,10 @@ def menu():
         print("  6. Imprimir Black Red Tree")
         print("********************************** B Tree ****************************************")
         print("  7. Agregar Nodo B Tree")
-        print("  8. Imprimir B Tree")
+        print("  8. Encontrar número en B Tree")
         print("********************************** B+ Tree ***************************************")
-        print("  7. Agregar Nodo B+ Tree")
-        print("  8. Imprimir B+ Tree")
+        print("  9. Agregar Nodo B+ Tree")
+        print("  10. Encontrar número en B+ Tree")
         print("**********************************************************************************")
         print("  0. Salir")
         print("**********************************************************************************")
@@ -85,7 +119,7 @@ def menu():
 
         x = int(input("Digite el numero de opción a elegir"))
 
-        executeOption(x, controllerAVL, controllerBlackRed)
+        executeOption(x, controllerAVL, controllerBlackRed, controllerBTree, controllerBPlusTree)
 
 
 if __name__ == '__main__':
